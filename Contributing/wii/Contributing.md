@@ -13,7 +13,7 @@ Once you've ripped your jingles from your ROMs, please rename them in a reasonab
 Then, move your jingles into `jingles/wii`, and edit the `index.json` in the root of the repository accordingly, adding a new entry in the json with this format:
 
 ```
-    { "game": "*game name as it appears in cocoon*", "file": "jingles/n3ds/*your jingle here*.wav"},
+    { "game": "*game name as it appears in cocoon*", "file": "jingles/wii/*your jingle here*.wav"},
 ```
 
 For example,
