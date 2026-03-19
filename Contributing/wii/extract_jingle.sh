@@ -54,19 +54,19 @@ for ROM in "$GAMES_DIR"/*.rvz "$GAMES_DIR"/*.iso; do
     bnr_dir="$tmpdir/bnr_extract"
     bnr="$bnr_dir/DATA/files/opening.bnr"
 
-    "$TOOL_DOLPHIN" extract -i "$ROM" -s opening.bnr -o "$bnr_dir"
+    "$TOOL_DOLPHIN" extract -i "$ROM" -s opening.bnr -o "$bnr_dir" > /dev/null
 
     #a bunch of wii games have an annoying header that needs to be clipped before wszst can handle them. tools that can handle these files with
     #the header do exist, but none of them are scriptable to my knowledge.
-    offset=$(grep -obam 1 $'\x55\xaa\x38\x2d' "$bnr" | head -1 | cut -d: -f1)
+    offset=$(LC_ALL=C grep -obam 1 $'\x55\xaa\x38\x2d' "$bnr" | LC_ALL=C head -1 | LC_ALL=C cut -d: -f1) > /dev/null
     if [[ -z "$offset" ]]; then
         echo "Could not find U8 header, skipping."
         continue
     fi
 
-    dd if="$bnr" of="$tmpdir/opening.arc" bs=1 skip="$offset"
+    dd if="$bnr" of="$tmpdir/opening.arc" bs=1 skip="$offset" status=none
 
-    "$TOOL_WSZST" extract "$tmpdir/opening.arc" --dest "$tmpdir/bnr_out"
+    "$TOOL_WSZST" extract "$tmpdir/opening.arc" --dest "$tmpdir/bnr_out" > /dev/null
 
     sound=$(find "$tmpdir/bnr_out" -name "sound.bin" | head -1)
     if [[ -z "$sound" ]]; then
@@ -125,7 +125,7 @@ for ROM in "$GAMES_DIR"/*.rvz "$GAMES_DIR"/*.iso; do
             print tolower(slug) ".wav", human
         }')
 
-    "$VGM" "$sound" -o "$JINGLES_DIR/$FINAL"
+    "$VGM" "$sound" -o "$JINGLES_DIR/$FINAL" > /dev/null
 
     rm -rf "$tmpdir"
 
