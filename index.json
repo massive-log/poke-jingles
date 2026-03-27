@@ -6,6 +6,16 @@
       "file": "jingles/gba/ffviadvance.wav"
     }
   ],
+  "nds": [
+    {
+      "name": "Pokemon Black 2",
+      "file": "jingles/nds/Pokemon Black 2.wav"
+    },
+    {
+      "name": "Pokemon White 2",
+      "file": "jingles/nds/Pokemon Black 2.wav"
+    }
+  ],
   "n3ds": [
     {
       "name": "Alliance Alive, The",
